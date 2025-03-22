@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Avinya's Love - Online Gift Store</title>
+  <style>
+    /* Global Styling */
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #f4ede6;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header Styling */
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(135deg, #b07d62, #8d5b44);
+      padding: 10px 20px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .header-icon {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .header-title {
+      font-family: "Garamond", serif;
+      font-size: 32px;
+      color: white;
+      margin: 0;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .instagram-link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: white;
+      font-size: 16px;
+    }
+
+    .instagram-logo {
+      width: 30px;
+      height: 30px;
+      margin-right: 8px;
+    }
+
+    /* Tab Styling */
+    .tab {
+      overflow: hidden;
+      background-color: #8d5b44;
+      display: flex;
+      justify-content: center;
+    }
+
+    .tab button {
+      background-color: inherit;
+      color: white;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      padding: 14px 20px;
+      font-size: 16px;
+      transition: background-color 0.3s;
+    }
+
+    .tab button:hover {
+      background-color: #5a4031;
+    }
+
+    .tab button.active {
+      background-color: #5a4031;
+    }
+
+    .tabcontent {
+      display: none;
+      padding: 20px;
+    }
+
+    /* How We Deliver Content */
+    .how-we-deliver {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .how-we-deliver h2 {
+      font-size: 24px;
+      color: #5a4031;
+      margin-bottom: 20px;
+    }
+
+    .how-we-deliver p {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .how-we-deliver h3 {
+      font-size: 20px;
+      color: #5a4031;
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+
+    /* About Us Content */
+    .about-us {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+      position: relative;
+      padding-bottom: 80px; /* Space for the developer section */
+    }
+
+    .about-us h2 {
+      font-size: 24px;
+      color: #5a4031;
+      margin-bottom: 20px;
+    }
+
+    .about-us p {
+      font-size: 16px;
+      color: #555;
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+
+    .about-us h3 {
+      font-size: 20px;
+      color: #5a4031;
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+
+    /* Developer Section */
+    .developer-section {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #000;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 15px;
+      text-align: center;
+      font-size: 14px;
+      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .developer-section a {
+      color: #b07d62;
+      text-decoration: none;
+    }
+
+    .developer-section a:hover {
+      text-decoration: underline;
+    }
+
+    /* Container */
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 25px;
+      padding: 30px;
+    }
+
+    /* Individual Item Styling */
+    .item {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 15px;
+      box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+      width: 380px;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all 0.3s ease-in-out;
+      backdrop-filter: blur(8px);
+    }
+
+    .item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    /* View Product Section */
+    .view-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* View Product Button (Image Preview) */
+    .view-btn {
+      width: 120px;
+      height: 100px;
+      border-radius: 10px;
+      display: inline-block;
+      background-image: url('img1.jpg');
+      background-size: cover;
+      background-position: center;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .view-btn:hover {
+      transform: scale(1.05);
+    }
+
+    /* Tap Text */
+    .tap-text {
+      font-size: 12px;
+      color: black;
+      margin-top: 5px;
+    }
+
+    /* Item Details */
+    .item-details {
+      flex-grow: 1;
+      padding-left: 15px;
+      text-align: left;
+    }
+
+    .item h2 {
+      font-size: 20px;
+      margin: 5px 0;
+      color: #5a4031;
+    }
+
+    .item p {
+      font-size: 14px;
+      color: #555;
+    }
+
+    .price {
+      font-size: 18px;
+      color: #b07d62;
+      font-weight: bold;
+      margin: 8px 0;
+    }
+
+    /* Order Button */
+    .order-btn {
+      background-color: #8d5b44;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+
+    .order-btn:hover {
+      background-color: #5a4031;
+    }
+
+    /* Order Form */
+    .order-form {
+      display: none;
+      flex-direction: column;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.3);
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 320px;
+      backdrop-filter: blur(10px);
+    }
+
+    .order-form input {
+      margin: 10px 0;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      width: 100%;
+      font-size: 14px;
+    }
+
+    .order-form button {
+      background-color: #8d5b44;
+      color: white;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 10px;
+      font-size: 16px;
+      transition: background 0.3s;
+    }
+
+    .order-form button:hover {
+      background-color: #5a4031;
+    }
+
+  </style>
+</head>
+<body>
+  <!-- Header Section -->
+  <div class="header">
+    <div class="header-left">
+      <img src="img3.jpg" alt="Avinya's Love Icon" class="header-icon">
+      <h1 class="header-title">AVINYA'S LOVE</h1>
+    </div>
+    <div class="header-right">
+      <a href="https://www.instagram.com/avinyas_love" target="_blank" class="instagram-link">
+        <img src="img4.jpg" alt="Instagram Logo" class="instagram-logo">
+        @avinyas_love
+      </a>
+    </div>
+  </div>
+
+  <!-- Tab Links -->
+  <div class="tab">
+    <button class="tablinks" onclick="openTab(event, 'OurProducts')" id="defaultOpen">Our Products</button>
+    <button class="tablinks" onclick="openTab(event, 'HowWeDeliver')">How We Deliver</button>
+    <button class="tablinks" onclick="openTab(event, 'AboutUs')">About Us</button>
+  </div>
+
+  <!-- Tab Content -->
+  <div id="OurProducts" class="tabcontent">
+    <div class="container" id="inventory"></div>
+  </div>
+
+  <div id="HowWeDeliver" class="tabcontent">
+    <div class="how-we-deliver">
+      <h2>How We Deliver</h2>
+      <p>
+        At Avinya's Love, we take pride in delivering exceptional products and earning the trust of our valued customers. When you click on "Order Now," you'll be directed to an order form where you can fill in your details and submit your order. Once we receive your order, we will get in touch with you via email as soon as possible to discuss any customizations or special requests you may have.
+      </p>
+      <p>
+        On the product page, you won't see product images directly. Instead, we provide a model of the product to give you a clear idea of what you're ordering. Since customizations may vary, we want to ensure you have the best possible view of the model. That's why we've included the option to "Tap on the gift to view product," allowing you to see the product model in full screen for a detailed and clear view.
+      </p>
+      <h3>Privacy & Data Protection</h3>
+      <p>
+        Your privacy is important to us. At Avinya's Love, we collect only the necessary information required to process your order, such as your name, email, phone number, and delivery address. This information is used solely for order fulfillment and communication purposes. We do not share, sell, or misuse your data.
+      </p>
+      <p>
+        All transactions are processed through secure channels, and your personal information is handled with the utmost care and confidentiality. You can shop with confidence, knowing that your data is protected at every step. If you have any questions about our privacy practices, feel free to reach out to us.
+      </p>
+    </div>
+  </div>
+
+  <div id="AboutUs" class="tabcontent">
+    <div class="about-us">
+      <h2>About Us</h2>
+      <p>
+        Avinya's Love was born from a simple yet profound idea: the world needs more love, thoughtfulness, and meaningful connections. Inspired by our passion for creating special moments and helping others express their emotions, we realized how powerful small gestures of love could be. What started as a hobby—planning surprises, crafting personalized gifts, and celebrating heartfelt connections—soon became a mission to spread love in all its forms. Avinya's Love is our way of turning those inspirations into a platform that helps people create memories, express feelings, and celebrate the beauty of relationships.
+      </p>
+      <h3>Founders</h3>
+      <p>Akshara and Ashitha</p>
+      <!-- Developer Section -->
+      <div class="developer-section">
+        Developed by <a href="https://www.instagram.com/pranay_rdyyy" target="_blank">Pranay Reddy</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Order Form -->
+  <div class="order-form" id="orderForm">
+    <h2>Enter Order Details</h2>
+    <input type="text" id="name" placeholder="Your Name" required>
+    <input type="email" id="email" placeholder="Your Email" required>
+    <input type="tel" id="phone" placeholder="Mobile Number" required>
+    <input type="text" id="address" placeholder="Delivery Address" required>
+    <input type="hidden" id="orderedItem">
+    <button onclick="submitOrder()">Submit Order</button>
+    <button onclick="closeOrderForm()">Cancel</button>
+  </div>
+
+  <script>
+    const inventoryUrl = "https://api.sheety.co/c47223c49301c8756dcd7d3f69a9478c/avinya'sLoveInventory/sheet1";
+    const orderUrl = "https://api.sheety.co/c47223c49301c8756dcd7d3f69a9478c/avinya'sLoveInventory/sheet2";
+
+    async function fetchInventory() {
+      try {
+        const response = await fetch(inventoryUrl);
+        const data = await response.json();
+
+        const inventoryContainer = document.getElementById("inventory");
+        inventoryContainer.innerHTML = "";
+
+        data.sheet1.forEach(item => {
+          const itemDiv = document.createElement("div");
+          itemDiv.className = "item";
+
+          let viewProductSection = `
+            <div class="view-section">
+              <a href="${item.imageUrl}" target="_blank" class="view-btn"></a>
+              <p class="tap-text">Tap the gift to view product</p>
+            </div>
+          `;
+
+          itemDiv.innerHTML = `
+            ${viewProductSection}
+            <div class="item-details">
+              <h2>${item.itemName}</h2>
+              <p>${item.description}</p>
+              <div class="price">₹${item.price}</div>
+              <button class="order-btn" onclick="openOrderForm('${item.itemName}')">Order Now</button>
+            </div>
+          `;
+
+          inventoryContainer.appendChild(itemDiv);
+        });
+      } catch (error) {
+        console.error("Error fetching inventory:", error);
+      }
+    }
+
+    function openOrderForm(itemName) {
+      document.getElementById("orderedItem").value = itemName;
+      document.getElementById("orderForm").style.display = "flex";
+    }
+
+    function closeOrderForm() {
+      document.getElementById("orderForm").style.display = "none";
+    }
+
+    async function submitOrder() {
+      const orderData = {
+        sheet2: {
+          orderPersonName: document.getElementById("name").value,
+          email: document.getElementById("email").value,
+          mobileNumber: document.getElementById("phone").value,
+          address: document.getElementById("address").value,
+          itemOrdered: document.getElementById("orderedItem").value
+        }
+      };
+
+      await fetch(orderUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(orderData)
+      });
+
+      alert("Order placed successfully!");
+      closeOrderForm();
+    }
+
+    // Tab Functionality
+    function openTab(evt, tabName) {
+      const tabcontent = document.getElementsByClassName("tabcontent");
+      for (let i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+
+      const tablinks = document.getElementsByClassName("tablinks");
+      for (let i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+
+    // Open the default tab on page load
+    document.getElementById("defaultOpen").click();
+
+    fetchInventory();
+  </script>
+</body>
+</html>
