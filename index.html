@@ -396,18 +396,30 @@
   </div>
 
   <script>
-    const inventoryUrl = "https://api.sheety.co/c47223c49301c8756dcd7d3f69a9478c/avinya'sLoveInventory/sheet1";
-    const orderUrl = "https://api.sheety.co/c47223c49301c8756dcd7d3f69a9478c/avinya'sLoveInventory/sheet2";
+    // Sheetson API configuration
+    const SHEETSON_API_KEY = "iK6OKl5Bh7qGYPpGvkh_6vYpUVcZmqjHODj1ZCFHzQ3aB3BkGOCLVfWJ4h0";
+    const SPREADSHEET_ID = "1s3RWBJSFuwCetUFNSgtVrJVOqopY0thij0Y3SOjnSB4";
+    
+    // Sheets endpoints
+    const inventoryUrl = `https://api.sheetson.com/v2/sheets/Sheet1`;
+    const orderUrl = `https://api.sheetson.com/v2/sheets/Sheet2`;
+    
+    // Headers for API requests
+    const headers = {
+      "Authorization": `Bearer ${SHEETSON_API_KEY}`,
+      "X-Spreadsheet-Id": SPREADSHEET_ID,
+      "Content-Type": "application/json"
+    };
 
     async function fetchInventory() {
       try {
-        const response = await fetch(inventoryUrl);
+        const response = await fetch(inventoryUrl, { headers });
         const data = await response.json();
 
         const inventoryContainer = document.getElementById("inventory");
         inventoryContainer.innerHTML = "";
 
-        data.sheet1.forEach(item => {
+        data.results.forEach(item => {
           const itemDiv = document.createElement("div");
           itemDiv.className = "item";
 
@@ -446,23 +458,37 @@
 
     async function submitOrder() {
       const orderData = {
-        sheet2: {
-          orderPersonName: document.getElementById("name").value,
-          email: document.getElementById("email").value,
-          mobileNumber: document.getElementById("phone").value,
-          address: document.getElementById("address").value,
-          itemOrdered: document.getElementById("orderedItem").value
-        }
+        orderPersonName: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        mobileNumber: document.getElementById("phone").value,
+        address: document.getElementById("address").value,
+        itemOrdered: document.getElementById("orderedItem").value
       };
 
-      await fetch(orderUrl, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(orderData)
-      });
+      try {
+        const response = await fetch(orderUrl, {
+          method: "POST",
+          headers: headers,
+          body: JSON.stringify(orderData)
+        });
 
-      alert("Order placed successfully!");
-      closeOrderForm();
+        if (response.ok) {
+          alert("Order placed successfully!");
+          closeOrderForm();
+          
+          // Clear the form
+          document.getElementById("name").value = "";
+          document.getElementById("email").value = "";
+          document.getElementById("phone").value = "";
+          document.getElementById("address").value = "";
+          document.getElementById("orderedItem").value = "";
+        } else {
+          throw new Error("Failed to submit order");
+        }
+      } catch (error) {
+        console.error("Error submitting order:", error);
+        alert("There was an error submitting your order. Please try again.");
+      }
     }
 
     // Tab Functionality
